@@ -11,7 +11,9 @@ export interface IDashboardService {
 class DashboardService implements IDashboardService {
     public async fetchFlights(): Promise<Array<IFlightRequest>> {
         try {
-            const response = await axios.get(`${API_URL}/flight/all`);
+            // const response = await axios.get(`${API_URL}/flight/all`);
+            const response = await axios.get(`./response_1666522055380.json`);
+            // console.log(response);
 
             let data: Array<IFlightRequest> = response.data;
 

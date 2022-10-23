@@ -40,9 +40,11 @@ const tasks: IFlightRequest[] = [
 ];
 
 const TasksList: FC = observer(() => {
+    const { operatorStore } = useStores();
+
     const renderCollapsePannels = (flights: IFlightRequest[]) => {
         // let prevDate = 0;
-        return flights.map((flight, index) => {
+        return operatorStore.fetchedFlights.map((flight, index) => {
             // let splitTitle = task.flight.date;
             // if (split) {
 
@@ -65,15 +67,21 @@ const TasksList: FC = observer(() => {
 
     //TO DO: разбивать по часам
     const renderCollapseHeader = (flight: IFlightRequest, index: number) => {
-        const flightDate = new Date(flight.flight.scheduledTime);
-        const durationInMs = flight.tasks[0].duration * 60000;
-        const endDate = new Date(flight.flight.scheduledTime + durationInMs);
+        const flightDate = new Date(flight.flight.scheduledTime * 1000);
+        const durationInMs = flight.tasks[0]?.duration * 60000 || 0;
+        const endDate = new Date(flight.flight.scheduledTime * 1000 + durationInMs);
 
-        const progress = Math.round(
-            (Math.abs(Date.now() - flight.flight.scheduledTime) /
-                (flight.flight.scheduledTime + durationInMs - flight.flight.scheduledTime)) *
-                100
-        );
+        // console.log(Date.now());
+        console.log(flight.flight.scheduledTime);
+        //1666524071 - 1566634837
+        // const progress = Math.round(
+        //     (Math.abs(1566598837 - flight.flight.scheduledTime) /
+        //         (flight.flight.scheduledTime +
+        //             flight.tasks[0]?.duration -
+        //             flight.flight.scheduledTime)) *
+        //         100
+        // );
+        const progress = Math.round((50 / flight.tasks[0]?.duration) * 100);
         return (
             <Row className='tasks-list__row' align='middle' gutter={20}>
                 <Col className='tasks-list__content tasks-list__content_time' span={3}>

@@ -34,11 +34,12 @@ const Journal: FC<Props> = ({ task, flight }) => {
     const flightDate = new Date(flight.scheduledTime);
     const endDate = new Date(flight.scheduledTime + task.duration);
     const durationInMs = task.duration * 60000;
-    const progress = Math.round(
-        (Math.abs(Date.now() - flight.scheduledTime) /
-            (flight.scheduledTime + durationInMs - flight.scheduledTime)) *
-            100
-    );
+    // const progress = Math.round(
+    //     (Math.abs(Date.now() - flight.scheduledTime) /
+    //         (flight.scheduledTime + durationInMs - flight.scheduledTime)) *
+    //         100
+    // );
+    const progress = Math.round((50 / task.duration) * 100);
 
     const showModal = () => {
         setOpen(true);

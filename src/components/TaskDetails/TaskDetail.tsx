@@ -15,9 +15,11 @@ const TaskDetail: FC<Props> = ({ task }) => {
                 <Row align='middle' gutter={16}>
                     <Col span={8}>
                         <Row align='middle' gutter={20}>
-                            <div className='tasks-list__status-box'>{task.tasks[0].startPoint}</div>
+                            <div className='tasks-list__status-box'>
+                                {task.tasks[0]?.startPoint}
+                            </div>
                             <ArrowRightOutlined className='task-detail__status-box-arrow-icon' />
-                            <div className='tasks-list__status-box'>{task.tasks[0].endPoint}</div>
+                            <div className='tasks-list__status-box'>{task.tasks[0]?.endPoint}</div>
                         </Row>
                     </Col>
                     <Col span={16}>
